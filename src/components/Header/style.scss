@@ -1,0 +1,15 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: #f6def8;
+    color: #000;
+    
+    .nav-btn{
+        font-weight: bold;
+    }
+}
+
+.closeButton{
+    width: 40px;
+    align-self: flex-end;
+}

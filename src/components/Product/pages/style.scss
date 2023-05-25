@@ -1,0 +1,16 @@
+.root{
+    background-color: #F4F4F4;
+    .container{
+        margin-top: 20px;
+        
+        .framedescrip{
+            padding: 40px;
+            .left{
+                width: 250px,
+            }
+            .right{
+                flex: 1 1 0, //chiếm hết độ rộng thằng cha
+            }
+        }
+    }
+}
