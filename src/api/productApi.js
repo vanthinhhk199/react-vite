@@ -1,16 +1,20 @@
 import axiosClient from "./axiosClient";
 
 const productApi = {
-  getAll(page = 1) {
-    const url = `/products?page=${page}`;
+  getAll(newPage = 1) {
+    const url = `/products?page=${newPage}`;
+    return axiosClient.get(url);
+  },
+  getProd(){
+    const url = `/products`;
     return axiosClient.get(url);
   },
   filter(filterValues){
-    const url = `/products/filter`;
+    const url = `/productfilter`;
     return axiosClient.post(url, filterValues)
   },
-  getDetail(productSlug){
-    const url = `/product/${productSlug}`;
+  getDetail(productId){
+    const url = `/product/${productId}`;
     return axiosClient.get(url);
   },
   getNew(){

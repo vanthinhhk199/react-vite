@@ -1,0 +1,16 @@
+.cart-form{
+    margin: 20px;
+    background-color: #ffffff;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+
+    .lable-table{
+        font-weight: bold;
+        
+    }
+    .totalcart{
+        display: flex;
+        justify-content: end;
+        font-weight: bold;
+        margin: 20px;
+    }
+}

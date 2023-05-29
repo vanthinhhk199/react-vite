@@ -1,29 +1,23 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
-import MenuIcon from "@mui/icons-material/Menu";
-import style from "./style.scss";
-import AppleIcon from "@mui/icons-material/Apple";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  Menu,
-  MenuItem,
-  TextField,
-} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import Register from "./../Auth/components/register/index";
-import Login from "./../Auth/components/login/index";
-import { useDispatch, useSelector } from "react-redux";
 import { AccountCircle } from "@mui/icons-material";
+import AppleIcon from "@mui/icons-material/Apple";
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Dialog, DialogContent, Menu, MenuItem } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Badge from "@mui/material/Badge";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import { logout } from "../Auth/userSlice";
+import Login from "./../Auth/components/login/index";
+import Register from "./../Auth/components/register/index";
+import { cartItemsCountSelector } from "./../Cart/selectors";
+import "./style.scss";
 
 Header.propTypes = {};
 
@@ -36,9 +30,11 @@ function Header(props) {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState(MODE.LOGIN);
+  const navigate = useNavigate();
   const loggedInUser = useSelector((state) => state.user.current);
   const isLoggedIn = !!loggedInUser.id;
   const [anchorEl, setAnchorEl] = useState(null);
+  const cartItemsCount = useSelector(cartItemsCountSelector);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -63,31 +59,45 @@ function Header(props) {
     setAnchorEl(null);
   };
 
+  const handleHomeClick = () => {
+    navigate("/");
+  };
+
+  const handleCartClick = () => {
+    navigate("/cart");
+  };
+
   return (
     <div>
       <AppBar position="static">
         <Toolbar className="navbar">
           <AppleIcon
+            className="iconHome"
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={handleHomeClick}
           >
             <MenuIcon />
           </AppleIcon>
           <Box>
+            <IconButton
+              aria-label="cart"
+              color="inherit"
+              onClick={handleCartClick}
+            >
+              <Badge badgeContent={cartItemsCount} color="error">
+                <ShoppingCartIcon />
+              </Badge>
+            </IconButton>
+
             {!isLoggedIn && (
               <Button color="inherit" onClick={handleClickOpen}>
                 Login
               </Button>
             )}
-
-            <IconButton aria-label="cart" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
 
             {isLoggedIn && (
               <IconButton color="inherit" onClick={handleUserClick}>

@@ -1,14 +1,20 @@
 .root{
     background-color: #F4F4F4;
+    padding-top: 30px;
     .container{
-        margin-top: 20px;
-        
         .framedescrip{
             padding: 40px;
             .left{
                 width: 250px,
             }
             .right{
+                .pagination{
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: center;
+                    margin: 25px 0;
+                    padding-bottom: 10px;
+                }
                 flex: 1 1 0, //chiếm hết độ rộng thằng cha
             }
         }
