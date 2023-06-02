@@ -12,66 +12,69 @@ ListPage.propTypes = {};
 function ListPage(props) {
   const [productList, setProductList] = useState([]);
   const [loading, setloading] = useState(true);
-  const [lastPage, setLastPage] = useState();
   const [totalPage, setTotalPage] = useState(1);
   const [page, setPage] = useState(1);
   const [cate, setCate] = useState([]);
-  const [manufacturersSort, setManufacturersSort] = useState([]);
+  const [priceMin, setPriceMin] = useState();
+  const [priceMax, setPriceMax] = useState();
+  const [cateId, setCateId] = useState();
+  const [search, setSearch] = useState();
 
   useEffect(() => {
     (async () => {
       try {
-        const allData = await productApi.getProd();
-        const newData = allData.product.data;
-        const last_page = allData.product.last_page;
-        // console.log(allData);
+        const allData = await productApi.getAll(
+          page,
+          priceMin,
+          priceMax,
+          cateId,
+          search
+        );
+        const newData = allData.data;
+        const last_page = allData.last_page;
         const allCate = await categoryApi.getAll();
-        const categories = allCate.category.map((category) => category.name);
+        const categories = allCate.category;
         setProductList(newData);
         setCate(categories);
         setTotalPage(last_page);
-        // setManufacturersSort(manufacturers);
       } catch (error) {
         console.log("Failed to fetch product list", error);
       }
       setloading(false);
     })();
-  }, []);
+  }, [page, priceMin, priceMax, cateId, search]);
 
-  const handlePageChange = async (event, newPage) => {
-    setPage(newPage);
+  const handleFilterChange = (filterValues) => {
     try {
-      const data = await productApi.getAll(newPage);
-      const newDataPagi = data.product.data;
-      console.log(data);
-      setProductList(newDataPagi);
-    } catch (error) {
-      console.log("Failed to fetch product list: ", error);
-    }
-  };
-
-  const handleFilterChange = async (filterValues) => {
-    try {
-      console.log(filterValues);
-      const dataAll = await productApi.filter(filterValues);
-      const newAllData = dataAll.data;
-      const last_page = dataAll.last_page;
-      setProductList(newAllData);
-      setTotalPage(last_page);
-      console.log(dataAll);
+      const priceMin = filterValues.priceRange[0];
+      const priceMax = filterValues.priceRange[1];
+      const cate = filterValues.selecCategory;
+      setPriceMin(priceMin);
+      setPriceMax(priceMax);
+      setCateId(cate);
+      setSearch(undefined);
     } catch (error) {
       console.log("Failed to fetch filtered product list: ", error);
     }
   };
 
+  const handleSearchChange = (filterValues) => {
+    const search = filterValues.search;
+    setSearch(search);
+  };
+
+  const handlePageChange = (even, newPage) => {
+    setPage(newPage);
+  };
+
   return (
     <Box className="root">
-      <Container className="container">
+      <Paper elevation={0} className="container">
         <Grid container className="framedescrip" spacing={2}>
           <Grid item className="left">
             <ProductSort
               category={cate}
-              manufacturers={manufacturersSort}
+              onSearchChange={handleSearchChange}
               onFilterChange={handleFilterChange}
             />
           </Grid>
@@ -93,7 +96,7 @@ function ListPage(props) {
             </Paper>
           </Grid>
         </Grid>
-      </Container>
+      </Paper>
     </Box>
   );
 }

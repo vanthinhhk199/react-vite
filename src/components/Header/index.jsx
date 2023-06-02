@@ -35,7 +35,7 @@ function Header(props) {
   const isLoggedIn = !!loggedInUser.id;
   const [anchorEl, setAnchorEl] = useState(null);
   const cartItemsCount = useSelector(cartItemsCountSelector);
-
+  console.log(cartItemsCount);
   const handleClickOpen = () => {
     setOpen(true);
   };

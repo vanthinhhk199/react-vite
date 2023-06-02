@@ -5,7 +5,7 @@ const cartItemsSelector = (state) => state.cart.cartItems;
 
 // Đếm số lượng sản phẩm trong giỏ hàng
 export const cartItemsCountSelector = createSelector(cartItemsSelector, (cartItems) =>
-  cartItems.reduce((count, item) => count + item.quantity, 0)
+  cartItems.reduce((count, item) => count + parseInt(item.quantity, 10), 0)
 );
 
 // Tính tổng giỏ hàng

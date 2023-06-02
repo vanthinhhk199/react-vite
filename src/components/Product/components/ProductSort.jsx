@@ -1,16 +1,17 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
 import {
+  Box,
   Button,
   Checkbox,
   FormControlLabel,
   FormGroup,
   Paper,
   Slider,
-  Tab,
-  Tabs,
+  TextField,
   Typography,
 } from "@mui/material";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import "./style.scss";
 
 ProductSort.propTypes = { category: PropTypes.array };
 
@@ -27,15 +28,15 @@ function valuetext(value) {
   return formatCurrency(value);
 }
 
-function ProductSort({ category, onFilterChange }) {
+function ProductSort({ category, onFilterChange, onSearchChange }) {
   const handleSortChange = (event, newValue) => {
     if (onChange) onChange(newValue);
   };
 
   const [filterValues, setFilterValues] = useState({
-    selectedCategories: [],
-    selectedManufacturers: [],
+    selecCategory: [],
     priceRange: [0, 4000000000],
+    search: [],
   });
 
   const handleFilterClick = () => {
@@ -43,13 +44,18 @@ function ProductSort({ category, onFilterChange }) {
   };
 
   const handleCheckboxChange = (event) => {
-    const { name, checked } = event.target;
-    setFilterValues((prevValues) => ({
-      ...prevValues,
-      [name]: checked
-        ? [...prevValues[name], event.target.value]
-        : prevValues[name].filter((value) => value !== event.target.value),
-    }));
+    const { name, checked, value } = event.target;
+    if (checked) {
+      setFilterValues((prevValues) => ({
+        ...prevValues,
+        [name]: [parseInt(value)],
+      }));
+    } else {
+      setFilterValues((prevValues) => ({
+        ...prevValues,
+        [name]: [],
+      }));
+    }
   };
 
   const handleSliderChange = (event, newValue) => {
@@ -58,41 +64,73 @@ function ProductSort({ category, onFilterChange }) {
       priceRange: newValue,
     }));
   };
+
+  const handleSearchChange = (event) => {
+    setFilterValues((prevValues) => ({
+      ...prevValues,
+      search: event.target.value,
+    }));
+  };
+  const handleSearchClick = () => {
+    onSearchChange(filterValues);
+  };
+
   return (
-    <Paper elevation={0}>
-      <Typography>Categories</Typography>
-      <FormGroup>
-        {category.map((category) => (
-          <FormControlLabel
-            key={category}
-            control={
-              <Checkbox
-                name="selectedCategories"
-                value={category}
-                checked={filterValues.selectedCategories.includes(category)}
-                onChange={handleCheckboxChange}
-              />
-            }
-            label={category}
-          />
-        ))}
-      </FormGroup>
-      <h3>Price</h3>
-      <br />
-      <Slider
-        value={filterValues.priceRange}
-        onChange={handleSliderChange}
-        getAriaValueText={valuetext}
-        valueLabelDisplay="on"
-        step={100}
-        marks
-        min={0}
-        max={10000}
-      />
-      <Button variant="outlined" onClick={handleFilterClick}>
-        Filter
-      </Button>
-    </Paper>
+    <>
+      <Box>
+        <TextField
+          className="filter-prod_search"
+          label="Search"
+          value={filterValues.search}
+          onChange={handleSearchChange}
+        />
+        <Button
+          className="filter-prod_btn"
+          variant="outlined"
+          onClick={handleSearchClick}
+        >
+          Search
+        </Button>
+      </Box>
+      <Paper elevation={3} className="filter-prod">
+        <Typography className="filter-prod_title">Categories</Typography>
+        <FormGroup>
+          {category.map((category) => (
+            <FormControlLabel
+              key={category.id}
+              control={
+                <Checkbox
+                  name="selecCategory"
+                  value={category.id}
+                  checked={filterValues.selecCategory.includes(category.id)}
+                  onChange={handleCheckboxChange}
+                />
+              }
+              label={category.name}
+            />
+          ))}
+        </FormGroup>
+        <h3>Price</h3>
+        <br />
+        <Slider
+          value={filterValues.priceRange}
+          onChange={handleSliderChange}
+          getAriaValueText={valuetext}
+          valueLabelDisplay="on"
+          step={100}
+          marks
+          min={0}
+          max={10000}
+        />
+        <Button
+          className="filter-prod_btn"
+          variant="outlined"
+          onClick={handleFilterClick}
+        >
+          Filter
+        </Button>
+      </Paper>
+    </>
   );
 }
 
