@@ -41,12 +41,13 @@ const cartSlice = createSlice({
         if (index >= 0) {
             state.cartItems[index].quantity = quantity;
         }
-        saveCartToLocalStorage(state.cartItems); // Cập nhật giỏ hàng trong localStorage
+        saveCartToLocalStorage(state.cartItems);
     },
     removeFromCart(state, action){
+
         const isNeedToRemove = action.payload
         state.cartItems = state.cartItems.filter((x) => x.id !== isNeedToRemove)
-        saveCartToLocalStorage(state.cartItems); // Cập nhật giỏ hàng trong localStorage
+        saveCartToLocalStorage(state.cartItems);
     },
   },
 });

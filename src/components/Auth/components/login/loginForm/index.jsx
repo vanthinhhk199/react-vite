@@ -5,10 +5,10 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { LockOutlined } from "@mui/icons-material";
-import { Avatar, Button, LinearProgress, Typography } from "@mui/material";
+import { Avatar, Box, Button, LinearProgress, Typography } from "@mui/material";
 import InputField from "../../../../Form-controls/InputField";
 import PasswordField from "../../../../Form-controls/PasswordField";
-
+import "./style.scss";
 // const useStyles = makeStyles((theme) => ({
 //   root: {
 //     position: "relative",
@@ -72,15 +72,15 @@ function LoginForm(props) {
   return (
     <div className="root">
       {isSubmitting && <LinearProgress className="progress" />}
+      <Box className="icon-login">
+        <Avatar className="avatar">
+          <LockOutlined></LockOutlined>
+        </Avatar>
 
-      <Avatar className="avatar">
-        <LockOutlined></LockOutlined>
-      </Avatar>
-
-      <Typography className="title" component="h3" variant="h5">
-        Sign In
-      </Typography>
-
+        <Typography className="title" component="h3" variant="h5">
+          Sign In
+        </Typography>
+      </Box>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <InputField name="email" label="Email" form={form} />
         <PasswordField name="password" label="Password" form={form} />

@@ -17,14 +17,6 @@ const productApi = {
     const url = `/product/${productId}`;
     return axiosClient.get(url);
   },
-  getNew(){
-    const url = `/products/new`;
-    return axiosClient.get(url);
-  },
-  search(keyword) {
-    const url = '/product/search';
-    const data = { keyword };
-    return axiosClient.post(url, data);
-  }
+
 };
 export default productApi;

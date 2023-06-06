@@ -26,6 +26,8 @@ import { formatPrice } from "./../../utils/common";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 CartFeature.propTypes = {};
 
@@ -144,16 +146,41 @@ function CartFeature(props) {
                       />
                     </TableCell>
                     <TableCell>{item.product?.name}</TableCell>
-                    {/* <TableCell>{item.quantity}x</TableCell> */}
-                    <TableCell>
+                    <TableCell className="quantity-cart">
+                      <IconButton
+                        className="quantity-cart--selecBtn"
+                        onClick={() =>
+                          handleQuantityChange(
+                            item.id,
+                            Math.max(1, item.quantity - 1)
+                          )
+                        }
+                        size="small"
+                      >
+                        <RemoveCircleOutlineIcon />
+                      </IconButton>
                       <TextField
+                        className="quantity-cart--TextField"
                         type="number"
                         value={item.quantity}
                         onChange={(e) =>
-                          handleQuantityChange(item.id, e.target.value)
+                          handleQuantityChange(
+                            item.id,
+                            Math.max(1, e.target.value)
+                          )
                         }
                         inputProps={{ min: 1 }}
+                        disabled
                       />
+                      <IconButton
+                        className="quantity-cart--selecBtn"
+                        onClick={() =>
+                          handleQuantityChange(item.id, item.quantity + 1)
+                        }
+                        size="small"
+                      >
+                        <AddCircleOutlineIcon />
+                      </IconButton>
                     </TableCell>
                     <TableCell>{formatPrice(item.product?.price)}</TableCell>
                     <TableCell>

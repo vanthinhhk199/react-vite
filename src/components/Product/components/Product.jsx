@@ -23,25 +23,27 @@ function Product({ product }) {
   };
 
   return (
-    <Paper
-      elevation={3}
-      className="page-prod"
-      style={{ margin: "10px" }}
-      onClick={handleClick}
-    >
-      <Box className="page-prod_image" padding={1}>
-        <img src={thumbnailUrl} alt={product.name} width="100%" />
-      </Box>
-      <Typography className="page-prod_item" variant="body2">
-        {product.name}
-      </Typography>
-      <Typography className="page-prod_item page-prod_price" variant="body2">
-        <Box component="span" fontSize="16px" fontWeight="bold">
-          {formatPrice(product.price)}
+    <>
+      <Paper
+        elevation={3}
+        className="page-prod"
+        style={{ margin: "10px" }}
+        onClick={handleClick}
+      >
+        <Box className="page-prod_image" padding={1}>
+          <img src={thumbnailUrl} alt={product.name} width="100%" />
         </Box>
-        - 20%
-      </Typography>
-    </Paper>
+        <Typography className="page-prod_item" variant="body2">
+          {product.name}
+        </Typography>
+        <Typography className="page-prod_item page-prod_price" variant="body2">
+          <Box component="span" fontSize="16px" fontWeight="bold">
+            {formatPrice(product.price)}
+          </Box>
+          - 20%
+        </Typography>
+      </Paper>
+    </>
   );
 }
 

@@ -2,6 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { LockOutlined } from "@mui/icons-material";
 import {
   Avatar,
+  Box,
   Button,
   LinearProgress,
   TextField,
@@ -13,7 +14,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import InputField from "./../../../../Form-controls/InputField/index";
 import PasswordField from "./../../../../Form-controls/PasswordField/index";
-import style from "./style.scss";
+import "./style.scss";
 
 RegisterForm.propTypes = {
   onSubmit: PropTypes.func,
@@ -63,19 +64,20 @@ function RegisterForm(props) {
     }
   };
 
-  // const { isSubmitting } = form.formState; // lấy ra isSubmitting xem form có đang submit hay không để show cái thanh chạy chờ load
+  const { isSubmitting } = form.formState; // lấy ra isSubmitting xem form có đang submit hay không để show cái thanh chạy chờ load
 
   return (
     <div className="root">
-      {/* {isSubmitting && <LinearProgress className=progress} />} */}
+      {isSubmitting && <LinearProgress className="progress" />}
+      <Box className="icon-regis">
+        <Avatar className="avatar">
+          <LockOutlined></LockOutlined>
+        </Avatar>
 
-      <Avatar className="avatar">
-        <LockOutlined></LockOutlined>
-      </Avatar>
-
-      <Typography className="title" component="h3" variant="h5">
-        Create An Account
-      </Typography>
+        <Typography className="title" component="h3" variant="h5">
+          Create An Account
+        </Typography>
+      </Box>
 
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <InputField name="name" label="Full Name" form={form} />
@@ -88,7 +90,7 @@ function RegisterForm(props) {
         />
 
         <Button
-          // disabled={isSubmitting}
+          disabled={isSubmitting}
           type="submit"
           className="submit"
           variant="contained"

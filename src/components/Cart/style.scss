@@ -52,5 +52,45 @@
           }
           
     }
+    .quantity-cart{
+        .quantity-cart--TextField input {
+            width: 100px;
+            text-align: center;
+        }
 
+        .quantity-cart--selecBtn{
+            // display: flex;
+            // align-items: center;
+            margin: 10px;
+        }
+    }
+
+}
+.cartmini{
+    .miniCart-left{
+        .miniCart-img{
+            width: 50px;
+        }
+
+    }
+    .miniCart-right{
+        display: block;
+        width: 100%;
+        .miniCart-right--name{
+            display: block;
+            white-space: nowrap; /* Ngăn chặn xuống dòng nội dung */
+            overflow: hidden; /* Ẩn nội dung vượt quá khung */
+            text-overflow: ellipsis;
+        }
+        .miniCart-right-info{
+            display: flex;
+            justify-content: end;
+            .miniCart-right--qty{
+                margin-right: 10px;
+            }
+            .miniCart-right--price{
+    
+            }
+        }
+    }
 }

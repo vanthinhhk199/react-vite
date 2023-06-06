@@ -6,10 +6,10 @@ import StorageKeys from '../../constants/storage-keys';
 export const register = createAsyncThunk('/register', async (payload) => { //createAsyncThunk từ Redux Toolkit. Nó định nghĩa một hoạt động bất đồng bộ để đăng ký người dùng.
   const data = await userApi.register(payload);
   // save data to local storage
-  localStorage.setItem(StorageKeys.TOKEN, data.jwt);
-  localStorage.setItem(StorageKeys.USER, JSON.stringify(data.user));
+  // localStorage.setItem(StorageKeys.TOKEN, data.jwt);
+  // localStorage.setItem(StorageKeys.USER, JSON.stringify(data.user));
 
-  return data.user;
+  return data;
 });
 
 

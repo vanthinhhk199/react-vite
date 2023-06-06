@@ -2,8 +2,14 @@ import { AccountCircle } from "@mui/icons-material";
 import AppleIcon from "@mui/icons-material/Apple";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Dialog, DialogContent, Menu, MenuItem } from "@mui/material";
+import {
+  Container,
+  Dialog,
+  DialogContent,
+  Menu,
+  MenuItem,
+  TextField,
+} from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
@@ -18,6 +24,8 @@ import Login from "./../Auth/components/login/index";
 import Register from "./../Auth/components/register/index";
 import { cartItemsCountSelector } from "./../Cart/selectors";
 import "./style.scss";
+import MiniCart from "./../Cart/miniCart";
+import SearchIcon from "@mui/icons-material/Search";
 
 Header.propTypes = {};
 
@@ -26,7 +34,7 @@ const MODE = {
   REGISTER: "register",
 };
 
-function Header(props) {
+function Header({ onSearch }) {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState(MODE.LOGIN);
@@ -34,8 +42,8 @@ function Header(props) {
   const loggedInUser = useSelector((state) => state.user.current);
   const isLoggedIn = !!loggedInUser.id;
   const [anchorEl, setAnchorEl] = useState(null);
-  const cartItemsCount = useSelector(cartItemsCountSelector);
-  console.log(cartItemsCount);
+  const [searchKeyword, setSearchKeyword] = useState("");
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -63,49 +71,65 @@ function Header(props) {
     navigate("/");
   };
 
-  const handleCartClick = () => {
-    navigate("/cart");
+  const handleSearch = () => {
+    onSearch(searchKeyword);
   };
 
   return (
     <div>
-      <AppBar position="static">
-        <Toolbar className="navbar">
-          <AppleIcon
-            className="iconHome"
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-            onClick={handleHomeClick}
-          >
-            <MenuIcon />
-          </AppleIcon>
-          <Box>
-            <IconButton
-              aria-label="cart"
+      <AppBar position="static" style={{ backgroundColor: "#f6def8" }}>
+        <Container>
+          <Toolbar className="navbar">
+            <AppleIcon
+              className="iconHome"
+              size="large"
+              edge="start"
               color="inherit"
-              onClick={handleCartClick}
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              onClick={handleHomeClick}
             >
-              <Badge badgeContent={cartItemsCount} color="error">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
-
-            {!isLoggedIn && (
-              <Button color="inherit" onClick={handleClickOpen}>
-                Login
+              <MenuIcon />
+            </AppleIcon>
+            <Box className="search">
+              <TextField
+                className="search-input"
+                hiddenLabel
+                id="filled-hidden-label-small"
+                placeholder="Search"
+                variant="filled"
+                size="small"
+                value={searchKeyword}
+                onChange={(e) => setSearchKeyword(e.target.value)}
+              />
+              <Button className="search-btn" onClick={handleSearch}>
+                <SearchIcon />
               </Button>
-            )}
+            </Box>
+            <Box>
+              <MiniCart />
+              {!isLoggedIn && (
+                <Button
+                  className="login"
+                  color="inherit"
+                  onClick={handleClickOpen}
+                >
+                  Login
+                </Button>
+              )}
 
-            {isLoggedIn && (
-              <IconButton color="inherit" onClick={handleUserClick}>
-                <AccountCircle />
-              </IconButton>
-            )}
-          </Box>
-        </Toolbar>
+              {isLoggedIn && (
+                <IconButton
+                  className="iconUser"
+                  color="inherit"
+                  onClick={handleUserClick}
+                >
+                  <AccountCircle />
+                </IconButton>
+              )}
+            </Box>
+          </Toolbar>
+        </Container>
       </AppBar>
 
       <Menu

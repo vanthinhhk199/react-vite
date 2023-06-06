@@ -1,4 +1,11 @@
-.avatar{
+.icon-regis{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    .avatar{
+        background-color: red;
+    }
+    .title{
+
+    }
 }

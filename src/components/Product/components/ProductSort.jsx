@@ -77,7 +77,7 @@ function ProductSort({ category, onFilterChange, onSearchChange }) {
 
   return (
     <>
-      <Box>
+      {/* <Box>
         <TextField
           className="filter-prod_search"
           label="Search"
@@ -91,7 +91,7 @@ function ProductSort({ category, onFilterChange, onSearchChange }) {
         >
           Search
         </Button>
-      </Box>
+      </Box> */}
       <Paper elevation={3} className="filter-prod">
         <Typography className="filter-prod_title">Categories</Typography>
         <FormGroup>
@@ -117,7 +117,7 @@ function ProductSort({ category, onFilterChange, onSearchChange }) {
           onChange={handleSliderChange}
           getAriaValueText={valuetext}
           valueLabelDisplay="on"
-          step={100}
+          step={500}
           marks
           min={0}
           max={10000}

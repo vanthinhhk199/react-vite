@@ -1,8 +1,23 @@
 .container{
-    margin: 50px;
+    margin-top: 40px;
     .paper-info{
-        padding: 40px;
+        padding: 10px;
         background-color: #f9f1f1;
-
     }
+}
+
+.order-left{
+
+}
+.order-right{
+
+}
+.order-left{
+    .lable-info{
+        display: flex;
+        .lable-info_name{ 
+            width: 30%;
+            text-align: start;
+        }
+     }
 }

@@ -1,6 +1,4 @@
 .root{
-    // background-color: #F4F4F4;
-    padding-top: 30px;
     .container{
         .framedescrip{
             padding: 40px;
@@ -14,9 +12,15 @@
                     justify-content: center;
                     margin: 25px 0;
                     padding-bottom: 10px;
+                    
                 }
                 flex: 1 1 0, //chiếm hết độ rộng thằng cha
             }
         }
+    }
+    .slide-page{
+        width: 80%;
+        display: block;
+        margin: 0 auto;
     }
 }

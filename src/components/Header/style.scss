@@ -11,6 +11,26 @@
     .nav-btn{
         font-weight: bold;
     }
+    .search{
+        display: flex;
+        align-items: center;
+
+        .search-input{
+            width: 80%;
+        }
+        .search-input input{
+            border-radius: 10px 0 0 0;
+
+        }
+        .search-btn{
+            background-color: #f6cdfa;
+            border-radius: 0 0 10px 0;
+            height: 40px;
+        }
+    }
+    .login{
+        font-weight: bold;
+    }
 }
 
 .closeButton{

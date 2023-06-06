@@ -17,13 +17,11 @@ function Register(props) {
   const { enqueueSnackbar } = useSnackbar(); // Sử dụng useSnackbar từ react-toastify để hiển thị thông báo
 
   const handleSubmit = async (values) => {
-    console.log(values);
     try {
       // Tạo action register và gửi dispatch để gọi API đăng ký
       const action = register(values);
       const resultAction = await dispatch(action);
       unwrapResult(resultAction);
-
       // close dialog
       const { closeDialog } = props;
       if (closeDialog) {
@@ -35,8 +33,15 @@ function Register(props) {
         autoHideDuration: 2000,
       });
     } catch (error) {
-      console.log(error);
-      enqueueSnackbar(error, { variant: "error" });
+      if (error.response && error.response.status === 404) {
+        const errorMessage = error.response.data.message;
+        enqueueSnackbar(errorMessage, { variant: "error" });
+      } else {
+        console.log(error);
+        enqueueSnackbar("The email has already been taken.", {
+          variant: "error",
+        });
+      }
     }
   };
 

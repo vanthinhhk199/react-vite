@@ -7,18 +7,30 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DetailPage from "./components/Product/pages/DetailPage";
 import CartFeature from "./components/Cart/index";
 import CheckOut from "./components/CheckOut/components/checkout";
+import Footer from "./components/Footer/footer";
+import Order from "./components/CheckOut/components/order";
 
 function App() {
+  const [searchKeyword, setSearchKeyword] = useState("");
+
+  const handleSearch = (searchKeyword) => {
+    setSearchKeyword(searchKeyword);
+  };
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
+        <Header onSearch={handleSearch} />
         <Routes>
-          <Route path="/" element={<ListPage />} />
+          <Route
+            path="/"
+            element={<ListPage searchKeyword={searchKeyword} />}
+          />
           <Route path="/product/:productId" element={<DetailPage />} />
           <Route path="/cart" element={<CartFeature />} />
           <Route path="/checkout" element={<CheckOut />} />
+          <Route path="/order" element={<Order />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );

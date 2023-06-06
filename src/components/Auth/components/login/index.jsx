@@ -25,8 +25,11 @@ function Login(props) {
       if (closeDialog) {
         closeDialog();
       }
+      enqueueSnackbar("Register successfully!!! 💯 ", {
+        variant: "success",
+        autoHideDuration: 2000,
+      });
     } catch (error) {
-      console.log("Failed to login:", error);
       enqueueSnackbar(error.message, { variant: "error" });
     }
   };
