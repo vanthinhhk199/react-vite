@@ -18,3 +18,22 @@
         color: red;
     }
 }
+.box-description{
+    background-color: #fff;
+    .detail-small{
+        display: flex;
+        .detail-small--left{
+            display: flex;
+            flex-flow: column;
+            color: rgba(0,0,0,.4);
+        }
+        .detail-small--right{
+            display: flex;
+        flex-flow: column;
+        margin-left: 20px;
+        }
+    }
+    .detail-small--des{
+        text-align: start;
+    }
+}

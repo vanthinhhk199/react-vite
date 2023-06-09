@@ -1,4 +1,13 @@
-import { Box, Container, Grid, Pagination, Paper } from "@mui/material";
+import {
+  Box,
+  Button,
+  ButtonBase,
+  Container,
+  Grid,
+  LinearProgress,
+  Pagination,
+  Paper,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import categoryApi from "../../../api/categoryApi";
 import ProductSkeletonList from "../components/ProductSkeletonList";
@@ -7,7 +16,9 @@ import ProductList from "./../components/ProductList";
 import ProductSort from "./../components/ProductSort";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./style.scss";
-import { Carousel } from "3d-react-carousal";
+import { Link, animateScroll as scroll } from "react-scroll";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import SlideShow from "./../../SlideShow/index";
 
 ListPage.propTypes = {};
 
@@ -95,21 +106,18 @@ function ListPage({ searchKeyword }) {
     navigate(`/?${queryParams.toString()}`);
   };
 
-  let slides = [
-    <img src="https://picsum.photos/800/300/?random" alt="1" />,
-    <img src="https://picsum.photos/800/301/?random" alt="2" />,
-    <img src="https://picsum.photos/800/302/?random" alt="3" />,
-    <img src="https://picsum.photos/800/303/?random" alt="4" />,
-    <img src="https://picsum.photos/800/304/?random" alt="5" />,
-  ];
+  const handleScrollToTop = () => {
+    scroll.scrollToTop({
+      duration: 500, // Thời gian trượt
+      smooth: "easeInOutQuart", // Hiệu ứng trượt lên
+    });
+  };
 
   return (
-    <Container>
+    <Container id="top">
+      <SlideShow />
       <Box className="root">
         <Paper elevation={0} className="container">
-          {/* <div style={{ paddingTop: "30px" }}>
-            <Carousel slides={slides} autoplay={true} interval={4000} />
-          </div> */}
           <Grid container className="framedescrip" spacing={2}>
             <Grid item className="left">
               <ProductSort
@@ -120,7 +128,7 @@ function ListPage({ searchKeyword }) {
             <Grid item className="right">
               <Paper elevation={0}>
                 {loading ? (
-                  <ProductSkeletonList length={8} />
+                  <ProductSkeletonList length={16} />
                 ) : (
                   <ProductList data={productList} />
                 )}
@@ -136,6 +144,10 @@ function ListPage({ searchKeyword }) {
             </Grid>
           </Grid>
         </Paper>
+        <ArrowUpwardIcon
+          className="scroll-to-top-container"
+          onClick={handleScrollToTop}
+        />
       </Box>
     </Container>
   );

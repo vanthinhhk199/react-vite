@@ -27,7 +27,7 @@ function Product({ product }) {
       <Paper
         elevation={3}
         className="page-prod"
-        style={{ margin: "10px" }}
+        style={{ margin: "10px", minHeight: "250px", cursor: "pointer" }}
         onClick={handleClick}
       >
         <Box className="page-prod_image" padding={1}>

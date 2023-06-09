@@ -26,6 +26,7 @@ import { cartItemsCountSelector } from "./../Cart/selectors";
 import "./style.scss";
 import MiniCart from "./../Cart/miniCart";
 import SearchIcon from "@mui/icons-material/Search";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 
 Header.propTypes = {};
 
@@ -73,11 +74,12 @@ function Header({ onSearch }) {
 
   const handleSearch = () => {
     onSearch(searchKeyword);
+    navigate("/");
   };
 
   return (
     <div>
-      <AppBar position="static" style={{ backgroundColor: "#f6def8" }}>
+      <AppBar position="static" style={{ backgroundColor: "rgb(243 239 255)" }}>
         <Container>
           <Toolbar className="navbar">
             <AppleIcon
@@ -106,7 +108,23 @@ function Header({ onSearch }) {
                 <SearchIcon />
               </Button>
             </Box>
-            <Box>
+            <Box className="header-right--icon">
+              <a
+                href="tel:0905869960"
+                style={{
+                  color: "black",
+                  display: "flex",
+                  textDecoration: "none",
+                }}
+              >
+                Hotline
+                <LocalPhoneIcon
+                  style={{
+                    marginRight: "10px",
+                    cursor: "pointer",
+                  }}
+                />
+              </a>
               <MiniCart />
               {!isLoggedIn && (
                 <Button

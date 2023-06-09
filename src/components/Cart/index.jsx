@@ -106,158 +106,170 @@ function CartFeature(props) {
           My Cart
         </Typography>
       </div>
-      <Paper elevation={3} className="cart-form">
-        <Grid container>
-          <Grid item xs={8}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>
-                    <Checkbox
-                      checked={selectedItems.length === cartItems.length}
-                      indeterminate={
-                        selectedItems.length > 0 &&
-                        selectedItems.length < cartItems.length
-                      }
-                      onChange={handleSelectAll}
-                    />
-                  </TableCell>
-                  <TableCell className="lable-table">Image</TableCell>
-                  <TableCell className="lable-table">Name</TableCell>
-                  <TableCell className="lable-table">Quantity</TableCell>
-                  <TableCell className="lable-table">Price</TableCell>
-                  <TableCell className="lable-table">Action</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {cartItems.map((item, index) => (
-                  <TableRow key={item.id}>
+      <Container>
+        <Paper elevation={3} className="cart-form">
+          <Grid container>
+            <Grid item xs={8}>
+              <Table>
+                <TableHead>
+                  <TableRow>
                     <TableCell>
                       <Checkbox
-                        checked={selectedItems.includes(item.id)}
-                        onChange={() => handleSelectItem(item.id)}
+                        checked={selectedItems.length === cartItems.length}
+                        indeterminate={
+                          selectedItems.length > 0 &&
+                          selectedItems.length < cartItems.length
+                        }
+                        onChange={handleSelectAll}
                       />
                     </TableCell>
-                    <TableCell>
-                      <img
-                        src={`http://localhost:8000/assets/uploads/product/${item.product?.image}`}
-                        alt={item.product?.name}
-                        style={{ maxWidth: 90, maxHeight: 70 }}
-                      />
-                    </TableCell>
-                    <TableCell>{item.product?.name}</TableCell>
-                    <TableCell className="quantity-cart">
-                      <IconButton
-                        className="quantity-cart--selecBtn"
-                        onClick={() =>
-                          handleQuantityChange(
-                            item.id,
-                            Math.max(1, item.quantity - 1)
-                          )
-                        }
-                        size="small"
-                      >
-                        <RemoveCircleOutlineIcon />
-                      </IconButton>
-                      <TextField
-                        className="quantity-cart--TextField"
-                        type="number"
-                        value={item.quantity}
-                        onChange={(e) =>
-                          handleQuantityChange(
-                            item.id,
-                            Math.max(1, e.target.value)
-                          )
-                        }
-                        inputProps={{ min: 1 }}
-                        disabled
-                      />
-                      <IconButton
-                        className="quantity-cart--selecBtn"
-                        onClick={() =>
-                          handleQuantityChange(item.id, item.quantity + 1)
-                        }
-                        size="small"
-                      >
-                        <AddCircleOutlineIcon />
-                      </IconButton>
-                    </TableCell>
-                    <TableCell>{formatPrice(item.product?.price)}</TableCell>
-                    <TableCell>
-                      <IconButton
-                        onClick={() => handleDeleteItemCart(item.id)}
-                        aria-label="delete"
-                        size="small"
-                      >
-                        <DeleteOutlineIcon style={{ color: "red" }} />
-                      </IconButton>
-                    </TableCell>
+                    <TableCell className="lable-table">Image</TableCell>
+                    <TableCell className="lable-table">Name</TableCell>
+                    <TableCell className="lable-table">Quantity</TableCell>
+                    <TableCell className="lable-table">Price</TableCell>
+                    <TableCell className="lable-table">Action</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </Grid>
-          <Grid className="cart-right" item xs={4}>
-            <Grid className="cart-info cart-right_code">
-              <TextField
-                className="cart-right-inp"
-                id="promo-code"
-                label="Promo code"
-              />
+                </TableHead>
+                {cartItems.length === 0 ? (
+                  <div style={{ textAlign: "center", display: "table-row" }}>
+                    Không có sản phẩm trong giỏ hàng
+                  </div>
+                ) : (
+                  <TableBody>
+                    {cartItems.map((item, index) => (
+                      <TableRow key={item.id}>
+                        <TableCell>
+                          <Checkbox
+                            checked={selectedItems.includes(item.id)}
+                            onChange={() => handleSelectItem(item.id)}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <img
+                            src={`http://localhost:8000/assets/uploads/product/${item.product?.image}`}
+                            alt={item.product?.name}
+                            style={{ maxWidth: 90, maxHeight: 70 }}
+                          />
+                        </TableCell>
+                        <TableCell>{item.product?.name}</TableCell>
+                        <TableCell className="quantity-cart">
+                          <div className="form-cart-qty">
+                            <IconButton
+                              className="quantity-cart--selecBtn"
+                              onClick={() =>
+                                handleQuantityChange(
+                                  item.id,
+                                  Math.max(1, item.quantity - 1)
+                                )
+                              }
+                              size="small"
+                            >
+                              <RemoveCircleOutlineIcon />
+                            </IconButton>
+                            <TextField
+                              className="quantity-cart--TextField"
+                              type="number"
+                              value={item.quantity}
+                              onChange={(e) =>
+                                handleQuantityChange(
+                                  item.id,
+                                  Math.max(1, e.target.value)
+                                )
+                              }
+                              inputProps={{ min: 1 }}
+                              disabled
+                            />
+                            <IconButton
+                              className="quantity-cart--selecBtn"
+                              onClick={() =>
+                                handleQuantityChange(item.id, item.quantity + 1)
+                              }
+                              size="small"
+                            >
+                              <AddCircleOutlineIcon />
+                            </IconButton>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          {formatPrice(item.product?.price)}
+                        </TableCell>
+                        <TableCell>
+                          <IconButton
+                            onClick={() => handleDeleteItemCart(item.id)}
+                            aria-label="delete"
+                            size="small"
+                          >
+                            <DeleteOutlineIcon style={{ color: "red" }} />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                )}
+              </Table>
+            </Grid>
+            <Grid className="cart-right" item xs={4}>
+              <Grid className="cart-info cart-right_code">
+                <TextField
+                  className="cart-right-inp"
+                  id="promo-code"
+                  label="Promo code"
+                />
+                <Button
+                  type="submit"
+                  className="submit"
+                  variant="contained"
+                  color="primary"
+                  style={{ width: "100px", height: "54px" }}
+                  size="large"
+                >
+                  Submit
+                </Button>
+              </Grid>
+              <Typography className="cart-info" variant="span" display="block">
+                Shipping cost
+                <Typography className="cart-info_price" variant="span">
+                  TBD
+                </Typography>
+              </Typography>
+              <Typography className="cart-info" variant="span" display="block">
+                Discount
+                <Typography className="cart-info_price" variant="span">
+                  0 đ
+                </Typography>
+              </Typography>
+              <Typography className="cart-info" variant="span" display="block">
+                Tax
+                <Typography className="cart-info_price" variant="span">
+                  TBD
+                </Typography>
+              </Typography>
+              <Typography
+                className="cart-info-total"
+                variant="span"
+                display="block"
+              >
+                Total
+                <Typography className="cart-info_price" variant="span">
+                  {formatPrice(calculateSelectedTotal())}
+                </Typography>
+              </Typography>
               <Button
                 type="submit"
-                className="submit"
+                className="cart-checkout"
                 variant="contained"
                 color="primary"
-                style={{ width: "100px", height: "54px" }}
+                style={{ width: "150px" }}
                 size="large"
+                disabled={!isItemsSelected}
+                onClick={handleSubmitCheckOut}
               >
-                Submit
+                CheckOut
               </Button>
             </Grid>
-            <Typography className="cart-info" variant="span" display="block">
-              Shipping cost
-              <Typography className="cart-info_price" variant="span">
-                TBD
-              </Typography>
-            </Typography>
-            <Typography className="cart-info" variant="span" display="block">
-              Discount
-              <Typography className="cart-info_price" variant="span">
-                0 đ
-              </Typography>
-            </Typography>
-            <Typography className="cart-info" variant="span" display="block">
-              Tax
-              <Typography className="cart-info_price" variant="span">
-                TBD
-              </Typography>
-            </Typography>
-            <Typography
-              className="cart-info-total"
-              variant="span"
-              display="block"
-            >
-              Total
-              <Typography className="cart-info_price" variant="span">
-                {formatPrice(calculateSelectedTotal())}
-              </Typography>
-            </Typography>
-            <Button
-              type="submit"
-              className="cart-checkout"
-              variant="contained"
-              color="primary"
-              style={{ width: "150px" }}
-              size="large"
-              disabled={!isItemsSelected}
-              onClick={handleSubmitCheckOut}
-            >
-              CheckOut
-            </Button>
           </Grid>
-        </Grid>
-      </Paper>
+        </Paper>
+      </Container>
     </>
   );
 }

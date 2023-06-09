@@ -1,6 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Container, Grid, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  Grid,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Paypal from "../paypal/paypal";
 
 Order.propTypes = {};
@@ -11,39 +24,48 @@ function Order(props) {
   const selectedItems = JSON.parse(decodeURIComponent(data));
 
   return (
-    <Container>
-      <Grid container spacing={2}>
-        <Grid item xs={6} className="order-left">
-          <Typography className="lable-info">
-            <Typography className="lable-info_name">Họ tên:</Typography>
-            <Typography>{selectedItems.name}</Typography>
-          </Typography>
-          <Typography className="lable-info">
-            <Typography className="lable-info_name">Số điện thoại:</Typography>
-            <Typography>{selectedItems.phone}</Typography>
-          </Typography>
-          <Typography className="lable-info">
-            <Typography className="lable-info_name">Email:</Typography>
-            <Typography>{selectedItems.email}</Typography>
-          </Typography>
-          <Typography className="lable-info">
-            <Typography className="lable-info_name">Địa chỉ:</Typography>
-            <Typography>{selectedItems.address}</Typography>
-          </Typography>
-          <Typography className="lable-info">
-            <Typography className="lable-info_name">Thành Phố:</Typography>
-            <Typography>{selectedItems.city}</Typography>
-          </Typography>
-          <Typography className="lable-info">
-            <Typography className="lable-info_name">Pin Code:</Typography>
-            <Typography>{selectedItems.pincode}</Typography>
-          </Typography>
-          <Typography className="lable-info">
-            <Typography className="lable-info_name">Total:</Typography>
-            <Typography>{selectedItems.total}</Typography>
-          </Typography>
-        </Grid>
-        <Grid item xs={6} className="order-right">
+    <Container style={{ paddingTop: "50px" }}>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 700 }} aria-label="spanning table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center" colSpan={4}>
+                Details
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>Họ tên:</TableCell>
+              <TableCell>{selectedItems.name}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Số điện thoại:</TableCell>
+              <TableCell>{selectedItems.phone}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Email:</TableCell>
+              <TableCell>{selectedItems.email}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Địa chỉ:</TableCell>
+              <TableCell>{selectedItems.address}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Thành Phố:</TableCell>
+              <TableCell>{selectedItems.city}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Pin Code:</TableCell>
+              <TableCell>{selectedItems.pincode}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Total:</TableCell>
+              <TableCell>{selectedItems.total}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+        <Box className="order">
           <Paypal
             totalPrice={selectedItems.total}
             name={selectedItems.name}
@@ -54,8 +76,8 @@ function Order(props) {
             prod={selectedItems.order_items}
             dataAll={selectedItems}
           />
-        </Grid>
-      </Grid>
+        </Box>
+      </TableContainer>
     </Container>
   );
 }

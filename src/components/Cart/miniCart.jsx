@@ -36,7 +36,12 @@ function MiniCart(props) {
 
   return (
     <>
-      <IconButton aria-label="cart" color="inherit" onClick={handleClick}>
+      <IconButton
+        style={{ marginRight: "10p" }}
+        aria-label="cart"
+        color="inherit"
+        onClick={handleClick}
+      >
         <Badge badgeContent={cartItemsCount} color="error">
           <ShoppingCartIcon />
         </Badge>

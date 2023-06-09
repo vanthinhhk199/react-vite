@@ -9,9 +9,10 @@ import QuantityField from "./../../Form-controls/QuantityField/index";
 
 AddToCartForm.propTypes = {
   onSubmit: PropTypes.func,
+  product: PropTypes.object,
 };
 
-function AddToCartForm({ onSubmit = null }) {
+function AddToCartForm({ onSubmit = null, product }) {
   const schema = yup.object().shape({
     quantity: yup
       .number()
@@ -27,6 +28,8 @@ function AddToCartForm({ onSubmit = null }) {
     },
     resolver: yupResolver(schema),
   });
+
+  console.log(product);
 
   const handleSubmit = async (values) => {
     if (onSubmit) {
@@ -47,6 +50,7 @@ function AddToCartForm({ onSubmit = null }) {
         color="primary"
         style={{ width: "150px" }}
         size="large"
+        disabled={product.qty <= 0}
       >
         Add To Cart
       </Button>

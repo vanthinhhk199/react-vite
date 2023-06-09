@@ -33,6 +33,9 @@ function ProductInfo({ product }) {
           </>
         )} */}
       </Box>
+      <Typography variant="body2" className="description-info">
+        Sản phẩm còn: {product.qty}
+      </Typography>
     </Box>
   );
 }

@@ -58,13 +58,12 @@ function RegisterForm(props) {
 
   const handleSubmit = (values) => {
     const { onSubmit } = props;
-    console.log(values);
     if (onSubmit) {
       onSubmit(values);
     }
   };
 
-  const { isSubmitting } = form.formState; // lấy ra isSubmitting xem form có đang submit hay không để show cái thanh chạy chờ load
+  const { isSubmitting } = form.formState;
 
   return (
     <div className="root">

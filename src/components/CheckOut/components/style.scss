@@ -2,22 +2,12 @@
     margin-top: 40px;
     .paper-info{
         padding: 10px;
-        background-color: #f9f1f1;
     }
 }
-
-.order-left{
-
-}
-.order-right{
-
-}
-.order-left{
-    .lable-info{
-        display: flex;
-        .lable-info_name{ 
-            width: 30%;
-            text-align: start;
-        }
-     }
+.order{
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    padding-top: 50px;
+    
 }

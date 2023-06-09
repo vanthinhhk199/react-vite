@@ -64,34 +64,8 @@ function ProductSort({ category, onFilterChange, onSearchChange }) {
       priceRange: newValue,
     }));
   };
-
-  const handleSearchChange = (event) => {
-    setFilterValues((prevValues) => ({
-      ...prevValues,
-      search: event.target.value,
-    }));
-  };
-  const handleSearchClick = () => {
-    onSearchChange(filterValues);
-  };
-
   return (
     <>
-      {/* <Box>
-        <TextField
-          className="filter-prod_search"
-          label="Search"
-          value={filterValues.search}
-          onChange={handleSearchChange}
-        />
-        <Button
-          className="filter-prod_btn"
-          variant="outlined"
-          onClick={handleSearchClick}
-        >
-          Search
-        </Button>
-      </Box> */}
       <Paper elevation={3} className="filter-prod">
         <Typography className="filter-prod_title">Categories</Typography>
         <FormGroup>
@@ -120,7 +94,7 @@ function ProductSort({ category, onFilterChange, onSearchChange }) {
           step={500}
           marks
           min={0}
-          max={10000}
+          max={20000}
         />
         <Button
           className="filter-prod_btn"

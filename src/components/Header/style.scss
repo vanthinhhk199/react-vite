@@ -5,7 +5,7 @@
     }
     display: flex;
     justify-content: space-between;
-    background-color: #f6def8;
+    background-color: rgb(243 239 255);
     color: #000;
     
     .nav-btn{
@@ -18,18 +18,23 @@
         .search-input{
             width: 80%;
         }
-        .search-input input{
-            border-radius: 10px 0 0 0;
+        .search-input div{
+            border-radius: 12px 0 0 0;
 
         }
         .search-btn{
-            background-color: #f6cdfa;
-            border-radius: 0 0 10px 0;
+            background-color: rgb(110, 110, 110);
+            border-radius: 0 0 12px 0;
             height: 40px;
+            color: #fff;
         }
     }
     .login{
         font-weight: bold;
+    }
+    .header-right--icon{
+        display: flex;
+        align-items: center;
     }
 }
 

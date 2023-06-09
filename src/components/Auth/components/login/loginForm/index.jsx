@@ -9,33 +9,6 @@ import { Avatar, Box, Button, LinearProgress, Typography } from "@mui/material";
 import InputField from "../../../../Form-controls/InputField";
 import PasswordField from "../../../../Form-controls/PasswordField";
 import "./style.scss";
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     position: "relative",
-//     paddingTop: theme.spacing(4),
-//   },
-
-//   avatar: {
-//     margin: "0 auto",
-//     backgroundColor: theme.palette.secondary.main,
-//   },
-
-//   title: {
-//     margin: theme.spacing(2, 0, 3, 0),
-//     textAlign: "center",
-//   },
-
-//   submit: {
-//     margin: theme.spacing(3, 0, 2, 0),
-//   },
-
-//   progress: {
-//     position: "absolute",
-//     top: theme.spacing(1),
-//     left: 0,
-//     right: 0,
-//   },
-// }));
 
 LoginForm.propTypes = {
   onSubmit: PropTypes.func,

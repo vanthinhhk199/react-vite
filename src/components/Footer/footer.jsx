@@ -21,15 +21,41 @@ function Footer(props) {
     <Container>
       <Box bgcolor="#fff">
         <Grid>
-          <hr style={{ color: "red" }} />
+          <hr style={{ margin: "0" }} />
           <Grid className="above-ft">
             <Typography>Get connected with us on social networks:</Typography>
-            <Grid>
-              <Facebook />
-              <Twitter />
-              <Google />
-              <Instagram />
-              <GitHub />
+            <Grid className="grid-icon">
+              <a
+                href="https://www.facebook.com/profile.php?id=100004187805429"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Facebook className="grid-icon" style={{ color: "blue" }} />
+              </a>
+              <a
+                href="https://twitter.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Twitter
+                  className="grid-icon"
+                  style={{ color: "rgb(12 190 209);" }}
+                />
+              </a>
+              <a
+                href="https://www.instagram.com/thinh_dangvan/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Instagram className="grid-icon" style={{ color: "#dd621a" }} />
+              </a>
+              <a
+                href="https://github.com/vanthinhhk199"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <GitHub style={{ color: "black" }} />
+              </a>
             </Grid>
           </Grid>
           <hr />

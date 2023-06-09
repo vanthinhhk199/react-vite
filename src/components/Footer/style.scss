@@ -2,6 +2,12 @@
     display: flex;
     justify-content: space-between;
     padding: 25px;
+
+    .grid-icon{
+        display: flex;
+        color: #5959ff;
+        margin-right: 10px;
+    }
 }
 .footer-info{
     display: flex;

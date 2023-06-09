@@ -44,6 +44,7 @@ function QuantityField({ name, label, form }) {
             value={value}
             onChange={onChange}
             style={{ width: "150px" }}
+            disabled
           />
           <IconButton
             style={{ marginTop: "20px" }}

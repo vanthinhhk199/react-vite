@@ -37,7 +37,6 @@ function Register(props) {
         const errorMessage = error.response.data.message;
         enqueueSnackbar(errorMessage, { variant: "error" });
       } else {
-        console.log(error);
         enqueueSnackbar("The email has already been taken.", {
           variant: "error",
         });

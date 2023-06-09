@@ -13,8 +13,8 @@
     }
 }
 .cart-form{
-    margin: 50px 150px;
-    background-color: #f9f1f1 !important;
+    margin: 50px 0;
+    background-color: #fff;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 
     .lable-table{
@@ -62,6 +62,10 @@
             // display: flex;
             // align-items: center;
             margin: 10px;
+        }
+
+        .form-cart-qty{
+            display: flex;
         }
     }
 
