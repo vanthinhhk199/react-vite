@@ -1,0 +1,20 @@
+.container{
+    margin-top: 40px;
+    .paper-info{
+        padding: 10px;
+    }
+}
+.order{
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    padding-top: 50px;
+    
+}
+.container-myorder{
+    margin: 20px;
+
+    .table-title th{
+        font-weight: bold;
+    }
+}

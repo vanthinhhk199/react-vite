@@ -17,6 +17,14 @@ const productApi = {
     const url = `/product/${productId}`;
     return axiosClient.get(url);
   },
+  addProd(formData){
+    const url = `/product`;
+    return axiosClient.post(url, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  }
 
 };
 export default productApi;

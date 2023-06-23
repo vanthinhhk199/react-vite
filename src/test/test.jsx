@@ -237,3 +237,32 @@ export default function PrimarySearchAppBar() {
     </Box>
   );
 }
+
+// --------------------------------------------------------------
+// checkout
+{
+  /*const handleSubmit = async (values) => {
+  const storedAccessToken = localStorage.getItem("access_token");
+  const storedUser = localStorage.getItem("user");
+  const userObject = JSON.parse(storedUser);
+  if (storedAccessToken && storedUser) {
+    const data = {
+      ...values,
+      order_items: products,
+      user_id: userObject.id,
+    };
+    try {
+      navigate(`/order?data=${encodeURIComponent(JSON.stringify(data))}`);
+    } catch (error) {
+      const errorOrder = error.response.data.message;
+      enqueueSnackbar(errorOrder, { variant: "error" });
+    }
+  } else {
+    enqueueSnackbar("Please log in. 💯 ", {
+      variant: "error",
+      autoHideDuration: 2000,
+    });
+  }
+};
+*/
+}
