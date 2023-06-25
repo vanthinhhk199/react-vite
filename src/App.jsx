@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./components";
-import HomePages from "./components/HomePages/index";
+import "./App.css";
 import AdminPage from "./components/Admin/index";
-import CartFeature from "./components/HomePages/components/Cart/index";
-import DetailPage from "./components/HomePages/components/Product/pages/DetailPage";
-import CheckOut from "./components/HomePages/components/CheckOut/components/checkout";
-import Order from "./components/HomePages/components/CheckOut/components/order";
-import MyOrder from "./components/HomePages/components/MyAccount/MyOrder";
-import MyAccount from "./components/HomePages/components/MyAccount/index";
+import HomePages from "./components/HomePages/index";
 
 function App() {
   return (
@@ -26,7 +19,11 @@ function App() {
           </Route>
           <Route path="/admin" element={<AdminPage />}>
             <Route path="/admin/add-product" />
+            <Route path="/admin/show-product" />
             <Route path="/admin/add-category" />
+            <Route path="/admin/show-category" />
+            <Route path="/admin/manage-users" />
+            <Route path="/admin/manage-orders" />
           </Route>
         </Routes>
       </BrowserRouter>

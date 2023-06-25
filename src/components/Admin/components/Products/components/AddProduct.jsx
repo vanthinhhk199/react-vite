@@ -87,6 +87,7 @@ function AddProductPage({ category }) {
         <FormControl fullWidth>
           <InputLabel id="select-category">Category</InputLabel>
           <Select
+            style={{ textAlign: "start" }}
             labelId="select-category"
             label="Category"
             name="cate_id"

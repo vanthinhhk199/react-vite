@@ -1,17 +1,17 @@
-import { PayPalScriptProvider } from "@paypal/react-paypal-js";
-import { PayPalButtons } from "@paypal/react-paypal-js";
-import { removeFromCart } from "../../Cart/CartSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useSnackbar } from "notistack";
-import checkoutApi from "./../../../../../api/checkoutApi";
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-function Paypal({ total }) {
+function Paypal({ total, data }) {
+  const [info, setInfo] = useState();
   var dataAll = useSelector((state) => state.checkout.selectAdress);
 
+  useEffect(() => {
+    setInfo(data);
+  }, [data]);
+
   return (
-    <div style={{ width: "400px" }}>
+    <div>
       <PayPalScriptProvider
         options={{
           "client-id":
@@ -24,7 +24,7 @@ function Paypal({ total }) {
               purchase_units: [
                 {
                   amount: {
-                    value: total,
+                    value: "199",
                   },
                   shipping: {
                     name: {
@@ -45,30 +45,27 @@ function Paypal({ total }) {
             });
           }}
           onApprove={async (data, actions) => {
-            const details = await actions.order.capture();
-
-            const idPayment = details.id;
-            const status = details.status;
-            const paymentTime = details.create_time;
-            const dateTimeString = paymentTime
-              .replace("T", " ")
-              .replace("Z", "");
-            const formattedPaymentTime = new Date(dateTimeString)
-              .toISOString()
-              .slice(0, 19)
-              .replace("T", " ");
-            const user = JSON.parse(localStorage.getItem("user"));
-            const userId = user.id;
-
-            const updatedDataAll = {
-              ...dataAll,
-              user_id: userId,
-              status: status,
-              idPayment: idPayment,
-              paymentTime: formattedPaymentTime,
-            };
-            console.log(updatedDataAll);
-
+            // const details = await actions.order.capture();
+            // const idPayment = details.id;
+            // const status = details.status;
+            // const paymentTime = details.create_time;
+            // const dateTimeString = paymentTime
+            //   .replace("T", " ")
+            //   .replace("Z", "");
+            // const formattedPaymentTime = new Date(dateTimeString)
+            //   .toISOString()
+            //   .slice(0, 19)
+            //   .replace("T", " ");
+            // const user = JSON.parse(localStorage.getItem("user"));
+            // const userId = user.id;
+            // const updatedDataAll = {
+            //   ...dataAll,
+            //   user_id: userId,
+            //   status: status,
+            //   idPayment: idPayment,
+            //   paymentTime: formattedPaymentTime,
+            // };
+            // console.log(updatedDataAll);
             // const response = await checkoutApi.order(updatedDataAll);
             // dataAll.order_items.forEach((item) => {
             //   const productId = item.id;

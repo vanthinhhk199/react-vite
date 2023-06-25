@@ -10,14 +10,19 @@ import React from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import AddCategory from "./components/Category/index";
 import AdminHeader from "./components/HeaderAdmin/Header";
+import Order from "./components/Order";
 import AddProduct from "./components/Products/index";
+import UserPage from "./components/User/index";
+import ChecklistIcon from "@mui/icons-material/Checklist";
+import DetailCategory from "./components/Category/components/DetailCategory";
+import DetailProduct from "./components/Products/components/DetailProduct";
 
 function AdminPage(props) {
   return (
     <Container>
       <AdminHeader />
       <Grid container spacing={2} sx={{ height: "100%" }}>
-        <Grid item xs={3} sx={{ height: "100%", minHeight: 0 }}>
+        <Grid item xs={2} sx={{ height: "100%", minHeight: 0 }}>
           <Box
             sx={{
               height: "100vh  ",
@@ -35,38 +40,40 @@ function AdminPage(props) {
               sx={{ flexGrow: 1, overflow: "auto" }}
             >
               <ListItemButton component={Link} to="/admin/add-product">
-                <ListItemIcon>
-                  <AddCircleOutlineIcon />
-                </ListItemIcon>
+                <AddCircleOutlineIcon />
                 <ListItemText primary="Add Product" />
               </ListItemButton>
+              <ListItemButton component={Link} to="/admin/show-product">
+                <ChecklistIcon />
+                <ListItemText primary="Detail Products" />
+              </ListItemButton>
               <ListItemButton component={Link} to="/admin/add-category">
-                <ListItemIcon>
-                  <AddCircleOutlineIcon />
-                </ListItemIcon>
+                <AddCircleOutlineIcon />
                 <ListItemText primary="Add Category" />
               </ListItemButton>
+              <ListItemButton component={Link} to="/admin/show-category">
+                <ChecklistIcon />
+                <ListItemText primary="Detail Category" />
+              </ListItemButton>
               <ListItemButton component={Link} to="/admin/manage-orders">
-                <ListItemIcon>
-                  <ManageAccountsIcon />
-                </ListItemIcon>
+                <ManageAccountsIcon />
                 <ListItemText primary="Manage Orders" />
               </ListItemButton>
               <ListItemButton component={Link} to="/admin/manage-users">
-                <ListItemIcon>
-                  <ManageAccountsIcon />
-                </ListItemIcon>
+                <ManageAccountsIcon />
                 <ListItemText primary="Manage Users" />
               </ListItemButton>
             </List>
           </Box>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={10}>
           <Routes>
             <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/show-product" element={<DetailProduct />} />
             <Route path="/add-category" element={<AddCategory />} />
-            {/* <Route path="/admin/manage-orders" element={<ManageOrdersPage />} />
-            <Route path="/admin/manage-users" element={<ManageUsersPage />} /> */}
+            <Route path="/show-category" element={<DetailCategory />} />
+            <Route path="/manage-orders" element={<Order />} />
+            <Route path="/manage-users" element={<UserPage />} />
           </Routes>
         </Grid>
       </Grid>

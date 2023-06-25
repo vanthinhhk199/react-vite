@@ -5,8 +5,8 @@ const productApi = {
     const url = `/products?page=${page}&cate=${cate}&min=${priceMin}&max=${priceMax}&search=${search}`;
     return axiosClient.get(url);
   },
-  getAlll() {
-    const url = `/productfilter`;
+  getAllProd() {
+    const url = `/admin/products`;
     return axiosClient.get(url);
   },
   getProd(){

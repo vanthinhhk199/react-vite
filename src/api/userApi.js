@@ -31,6 +31,10 @@ const userApi = {
       },
     });
   },
+  getUser(){
+    const url = `/user`;
+    return axiosClient.get(url);
+  },
  
 };
 

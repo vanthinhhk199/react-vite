@@ -17,6 +17,9 @@ const checkoutApi = {
     const url = `/dele-addresses/${id}`;
     return axiosClient.delete(url);
   },
-  
+  updateAddress(data) {
+    const url = `/checkout/update-address`;
+    return axiosClient.put(url, data);
+  },
 };
 export default checkoutApi;
