@@ -24,7 +24,19 @@ const productApi = {
         'Content-Type': 'multipart/form-data',
       },
     });
-  }
+  },
+  updateProd(updatedProduct, id){
+    const url = `/product/${id}`;
+    return axiosClient.post(url, updatedProduct, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  },
+  deleteProd(id){
+    const url = `/product/${id}`;
+    return axiosClient.delete(url);
+  },
 
 };
 export default productApi;

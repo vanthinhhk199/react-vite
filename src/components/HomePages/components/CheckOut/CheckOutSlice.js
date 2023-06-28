@@ -12,9 +12,7 @@ const initialState = {
     name: "",
     phone: "",
     user_id: "",
-    total: "",
     address: "",
-    order_items: [],
 
   },
 };

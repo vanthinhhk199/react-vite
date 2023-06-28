@@ -12,6 +12,18 @@ const categoryApi = {
         'Content-Type': 'multipart/form-data',
       },
     });
-  }
+  },
+  updateCate(updatedCategory, id){
+    const url = `/category/${id}`;
+    return axiosClient.post(url, updatedCategory, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  },
+  deleteCate(id){
+    const url = `/category/${id}`;
+    return axiosClient.delete(url);
+  },
 };
 export default categoryApi;

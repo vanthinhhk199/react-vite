@@ -41,7 +41,11 @@ function CheckOut(props) {
             <CheckoutAddress />
           </Grid>
           <Grid item xs={4}>
-            <CheckoutListProd data={products} totalPrice={totalPrice} />
+            <CheckoutListProd
+              data={products}
+              total_price={totalPrice}
+              totalPriceUSD={totalPriceUSD}
+            />
           </Grid>
         </Grid>
       </Paper>

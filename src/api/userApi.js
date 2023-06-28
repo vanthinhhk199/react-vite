@@ -35,6 +35,15 @@ const userApi = {
     const url = `/user`;
     return axiosClient.get(url);
   },
+  deleteUser(id){
+    const url = `/delete-user/${id}`;
+    return axiosClient.delete(url);
+  },
+  updateRole(data, id){
+    const url = `/users/role/${id}`;
+    return axiosClient.put(url, data);
+  },
+  
  
 };
 

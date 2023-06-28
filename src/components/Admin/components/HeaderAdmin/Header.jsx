@@ -7,10 +7,25 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import { logout } from "../../../HomePages/components/Auth/userSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminHeader() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogoutClick = () => {
+    const action = logout();
+    dispatch(action);
+    navigate("/");
+  };
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box
+      sx={{ flexGrow: 1 }}
+      style={{ width: "100%", position: "fixed", zIndex: "1" }}
+    >
       <AppBar position="static">
         <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center" }}>
@@ -19,7 +34,9 @@ export default function AdminHeader() {
               Admin
             </Typography>
           </div>
-          <Button color="inherit">Logout</Button>
+          <Button onClick={handleLogoutClick} color="inherit">
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>

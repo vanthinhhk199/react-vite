@@ -2,6 +2,8 @@ import { Button, Container, TextField } from "@mui/material";
 import React, { useState } from "react";
 import * as Yup from "yup";
 import categoryApi from "./../../../../../api/categoryApi";
+import { enqueueSnackbar } from "notistack";
+import BackupIcon from "@mui/icons-material/Backup";
 
 AddCategoryPage.propTypes = {};
 
@@ -42,7 +44,17 @@ function AddCategoryPage(props) {
       formData.append("image", category.image);
 
       const response = await categoryApi.addCate(formData);
-      console.log(response);
+      enqueueSnackbar(" Add Category successfully", {
+        variant: "success",
+        autoHideDuration: 2000,
+      });
+      setCategory({
+        name: "",
+        slug: "",
+        image: null,
+      });
+      setImagePreview(null);
+      setErrors({});
     } catch (validationErrors) {
       const errorsMap = validationErrors.inner.reduce(
         (acc, curr) => ({ ...acc, [curr.path]: curr.message }),
@@ -77,23 +89,60 @@ function AddCategoryPage(props) {
           helperText={errors?.slug}
         />
 
-        <input type="file" name="image" onChange={handleImageChange} />
-        {imagePreview && (
-          <img src={imagePreview} alt="Preview" style={{ width: "200px" }} />
-        )}
-        {errors?.image && (
-          <p
+        <div style={{ backgroundColor: "#fff", padding: "25px" }}>
+          <label
+            htmlFor="inp-file"
             style={{
-              color: "#d32f2f",
-              margin: "5px 12px",
-              fontSize: "12px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              borderRadius: "22px",
+              borderStyle: "dashed",
+              borderWidth: "2px",
+              borderColor: "#dcdfe4",
+              cursor: "pointer",
+              padding: "15px",
             }}
           >
-            {errors.image}
-          </p>
-        )}
+            <BackupIcon style={{ fontSize: "65px", color: "#6d96f3" }} />
+            <span style={{ color: "#999" }}>
+              Upload an image or drag and drop
+            </span>
+            <span style={{ color: "#999" }}>PNG, JPG</span>
+          </label>
+          <input
+            id="inp-file"
+            style={{ display: "none" }}
+            type="file"
+            name="image"
+            onChange={handleImageChange}
+          />
+          {imagePreview && (
+            <img
+              src={imagePreview}
+              alt="Preview"
+              style={{ width: "130px", marginTop: "10px" }}
+            />
+          )}
+          {errors?.image && (
+            <p
+              style={{
+                color: "#d32f2f",
+                margin: "5px 12px",
+                fontSize: "12px",
+              }}
+            >
+              {errors.image}
+            </p>
+          )}
+        </div>
 
-        <Button type="submit" variant="contained" color="primary">
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          style={{ marginTop: "20px" }}
+        >
           Add category
         </Button>
       </form>

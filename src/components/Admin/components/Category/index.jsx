@@ -1,6 +1,5 @@
 import React from "react";
 import AddCategoryPage from "./components/AddCategory";
-import DetailCategory from "./components/DetailCategory";
 
 AddCategory.propTypes = {};
 

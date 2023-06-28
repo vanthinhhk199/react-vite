@@ -47,8 +47,18 @@ function MyAccount(props) {
 
   return (
     <Container style={{ display: "flex" }}>
-      <Grid container spacing={2} className="container">
-        <Grid className="myaccount-left" item xs={2}>
+      <Grid
+        container
+        spacing={2}
+        className="container"
+        style={{ position: "relative" }}
+      >
+        <Grid
+          className="myaccount-left"
+          item
+          xs={2}
+          style={{ backgroundColor: "#fff" }}
+        >
           <Grid className="myaccount-left_avatar">
             <Grid className="user-avatar">
               <img
@@ -57,49 +67,77 @@ function MyAccount(props) {
                 alt={userInfo.avatar || "Default Avatar"}
               />
             </Grid>
-            <Grid className="user-name">Thinh</Grid>
+            <Grid className="user-name" style={{ padding: "0 0 0 10px" }}>
+              Thinh
+            </Grid>
           </Grid>
           <Grid className="myaccount-left_action">
             <Grid
               className="action-user"
               onClick={() => setShowChildActions(!showChildActions)}
             >
-              <div className="action-user_icon">
+              <div className="action-user_icon" style={{ cursor: "pointer" }}>
                 <PersonIcon style={{ color: "blue" }} />
-                <a>Tài Khoản Của Tôi</a>
+                <a style={{ padding: "0 0 0 5px" }}>Tài Khoản Của Tôi</a>
               </div>
             </Grid>
             {showChildActions && (
               <Grid className="action-user child">
-                <a onClick={() => handleFormChange(FORMS.PROFILE)}>Hồ Sơ</a>
-                <a>Ngân Hàng</a>
-                <a>Địa Chỉ</a>
-                <a onClick={() => handleFormChange(FORMS.CHANGE_PASSWORD)}>
+                <a
+                  onClick={() => handleFormChange(FORMS.PROFILE)}
+                  style={{ cursor: "pointer", padding: "5px 0 0 0" }}
+                >
+                  Hồ Sơ
+                </a>
+                <a style={{ cursor: "pointer", padding: "5px 0 0 0" }}>
+                  Ngân Hàng
+                </a>
+                <a style={{ cursor: "pointer", padding: "5px 0 0 0" }}>
+                  Địa Chỉ
+                </a>
+                <a
+                  onClick={() => handleFormChange(FORMS.CHANGE_PASSWORD)}
+                  style={{ cursor: "pointer", padding: "5px 0 0 0" }}
+                >
                   Đổi Mật Khẩu
                 </a>
               </Grid>
             )}
             <Grid className="action-user">
-              <div className="action-user_icon">
+              <div className="action-user_icon" style={{ cursor: "pointer" }}>
                 <EventNoteIcon style={{ color: "blue" }} />
-                <a onClick={() => handleFormChange(FORMS.MY_ORDER)}>Đơn Mua</a>
+                <a
+                  onClick={() => handleFormChange(FORMS.MY_ORDER)}
+                  style={{ cursor: "pointer", padding: "0 0 0 5px" }}
+                >
+                  Đơn Mua
+                </a>
               </div>
             </Grid>
             <Grid className="action-user">
-              <div className="action-user_icon">
+              <div className="action-user_icon" style={{ cursor: "pointer" }}>
                 <NotificationsNoneIcon style={{ color: "#ff4217" }} />
-                <a>Thông Báo</a>
+                <a style={{ cursor: "pointer", padding: "0 0 0 5px" }}>
+                  Thông Báo
+                </a>
               </div>
             </Grid>
             <Grid className="action-user">
-              <div className="action-user_icon">
+              <div className="action-user_icon" style={{ cursor: "pointer" }}>
                 <ConfirmationNumberIcon style={{ color: "#ff2424" }} />
-                <a>Kho Voucher</a>
+                <a style={{ cursor: "pointer", padding: "0 0 0 5px" }}>
+                  Kho Voucher
+                </a>
               </div>
             </Grid>
           </Grid>
         </Grid>
-        <Grid className="myaccount-right" item xs={10}>
+        <Grid
+          className="myaccount-right"
+          item
+          xs={10}
+          style={{ backgroundColor: "#fff" }}
+        >
           {renderForm()}
         </Grid>
       </Grid>

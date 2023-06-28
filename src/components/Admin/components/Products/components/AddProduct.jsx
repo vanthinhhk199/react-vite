@@ -11,6 +11,8 @@ import {
 } from "@mui/material";
 import * as Yup from "yup";
 import productApi from "./../../../../../api/productApi";
+import { enqueueSnackbar } from "notistack";
+import BackupIcon from "@mui/icons-material/Backup";
 
 AddProductPage.propTypes = {
   category: PropTypes.array.isRequired,
@@ -70,7 +72,21 @@ function AddProductPage({ category }) {
       formData.append("qty", product.qty);
 
       const response = await productApi.addProd(formData);
-      console.log(response);
+      setProduct({
+        cate_id: "",
+        name: "",
+        slug: "",
+        description: "",
+        price: "",
+        image: null,
+        qty: "",
+      });
+      setImagePreview(null);
+      enqueueSnackbar(" Add Product successfully", {
+        variant: "success",
+        autoHideDuration: 2000,
+      });
+      setErrors({});
     } catch (validationErrors) {
       const errorsMap = validationErrors.inner.reduce(
         (acc, curr) => ({ ...acc, [curr.path]: curr.message }),
@@ -159,21 +175,49 @@ function AddProductPage({ category }) {
           error={Boolean(errors?.price)}
           helperText={errors?.price}
         />
-        <input type="file" name="image" onChange={handleImageChange} />
-        {imagePreview && (
-          <img src={imagePreview} alt="Preview" style={{ width: "200px" }} />
-        )}
-        {errors?.image && (
-          <p
+        <div style={{ backgroundColor: "#fff", padding: "25px" }}>
+          <label
+            htmlFor="inp-file"
             style={{
-              color: "#d32f2f",
-              margin: "5px 12px",
-              fontSize: "12px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              borderRadius: "22px",
+              borderStyle: "dashed",
+              borderWidth: "2px",
+              borderColor: "#dcdfe4",
+              cursor: "pointer",
+              padding: "15px",
             }}
           >
-            {errors.image}
-          </p>
-        )}
+            <BackupIcon style={{ fontSize: "65px", color: "#6d96f3" }} />
+            <span style={{ color: "#999" }}>
+              Upload an image or drag and drop
+            </span>
+            <span style={{ color: "#999" }}>PNG, JPG</span>
+          </label>
+          <input
+            id="inp-file"
+            style={{ display: "none" }}
+            type="file"
+            name="image"
+            onChange={handleImageChange}
+          />
+          {imagePreview && (
+            <img src={imagePreview} alt="Preview" style={{ width: "200px" }} />
+          )}
+          {errors?.image && (
+            <p
+              style={{
+                color: "#d32f2f",
+                margin: "5px 12px",
+                fontSize: "12px",
+              }}
+            >
+              {errors.image}
+            </p>
+          )}
+        </div>
         <TextField
           label="Quantity"
           name="qty"

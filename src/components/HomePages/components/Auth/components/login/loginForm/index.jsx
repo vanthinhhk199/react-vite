@@ -43,34 +43,42 @@ function LoginForm(props) {
   const { isSubmitting } = form.formState;
 
   return (
-    <div className="root">
-      {isSubmitting && <LinearProgress className="progress" />}
-      <Box className="icon-login">
-        <Avatar className="avatar">
-          <LockOutlined></LockOutlined>
-        </Avatar>
-
-        <Typography className="title" component="h3" variant="h5">
-          Sign In
-        </Typography>
-      </Box>
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <InputField name="email" label="Email" form={form} />
-        <PasswordField name="password" label="Password" form={form} />
-
-        <Button
-          disabled={isSubmitting}
-          type="submit"
-          className="submit"
-          variant="contained"
-          color="primary"
+    <>
+      {isSubmitting && (
+        <LinearProgress
+          className="progress"
           fullWidth
-          size="large"
-        >
-          Sign in
-        </Button>
-      </form>
-    </div>
+          style={{ position: "absolute", top: "0", left: "0" }}
+        />
+      )}
+      <div className="root" style={{ position: "relative" }}>
+        <Box className="icon-login">
+          <Avatar className="avatar">
+            <LockOutlined></LockOutlined>
+          </Avatar>
+
+          <Typography className="title" component="h3" variant="h5">
+            Sign In
+          </Typography>
+        </Box>
+        <form onSubmit={form.handleSubmit(handleSubmit)}>
+          <InputField name="email" label="Email" form={form} />
+          <PasswordField name="password" label="Password" form={form} />
+
+          <Button
+            disabled={isSubmitting}
+            type="submit"
+            className="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+            size="large"
+          >
+            Sign in
+          </Button>
+        </form>
+      </div>
+    </>
   );
 }
 

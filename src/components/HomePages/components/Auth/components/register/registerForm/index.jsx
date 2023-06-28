@@ -93,78 +93,85 @@ function RegisterForm(props) {
   console.log(formattedDate);
 
   return (
-    <div className="root">
-      <Box className="icon-regis">
-        {isSubmitting && <LinearProgress className="progress" />}
-        <Avatar className="avatar">
-          <LockOutlined />
-        </Avatar>
-
-        <Typography className="title" component="h3" variant="h5">
-          Create An Account
-        </Typography>
-      </Box>
-
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <InputField name="name" label="Full Name" form={form} />
-        <InputField name="email" label="Email" form={form} />
-        <PasswordField name="password" label="Password" form={form} />
-        <PasswordField
-          name="password_confirmation"
-          label="Retype Password"
-          form={form}
-        />
-        <InputField name="phone" label="Phone" form={form} />
-
-        <TextField
+    <>
+      {isSubmitting && (
+        <LinearProgress
+          className="progress"
           fullWidth
-          name="birthday"
-          label="Date of Birth (dd/mm/yyyy)"
-          type="text"
-          value={formattedDate}
-          onChange={handleDateChange}
-          error={!!form.formState.errors.birthday}
-          helperText={
-            form.formState.errors.birthday &&
-            form.formState.errors.birthday.message
-          }
-          form={form}
+          style={{ position: "absolute", top: "0", left: "0" }}
         />
+      )}
+      <div className="root" style={{ position: "relative" }}>
+        <Box className="icon-regis">
+          <Avatar className="avatar">
+            <LockOutlined />
+          </Avatar>
 
-        <FormControl
-          component="fieldset"
-          error={!!form.formState.errors.gender}
-        >
-          <RadioGroup
-            row
-            name="gender"
-            value={form.watch("gender")}
-            onChange={(e) => form.setValue("gender", e.target.value)}
+          <Typography className="title" component="h3" variant="h5">
+            Create An Account
+          </Typography>
+        </Box>
+        <form onSubmit={form.handleSubmit(handleSubmit)}>
+          <InputField name="name" label="Full Name" form={form} />
+          <InputField name="email" label="Email" form={form} />
+          <PasswordField name="password" label="Password" form={form} />
+          <PasswordField
+            name="password_confirmation"
+            label="Retype Password"
+            form={form}
+          />
+          <InputField name="phone" label="Phone" form={form} />
+
+          <TextField
+            fullWidth
+            name="birthday"
+            label="Date of Birth (dd/mm/yyyy)"
+            type="text"
+            value={formattedDate}
+            onChange={handleDateChange}
+            error={!!form.formState.errors.birthday}
+            helperText={
+              form.formState.errors.birthday &&
+              form.formState.errors.birthday.message
+            }
+            form={form}
+          />
+
+          <FormControl
+            component="fieldset"
+            error={!!form.formState.errors.gender}
           >
-            <FormControlLabel value="Nam" control={<Radio />} label="Nam" />
-            <FormControlLabel value="Nữ" control={<Radio />} label="Nữ" />
-            <FormControlLabel value="Khác" control={<Radio />} label="Khác" />
-          </RadioGroup>
-          {form.formState.errors.gender && (
-            <Typography variant="caption" color="error">
-              {form.formState.errors.gender.message}
-            </Typography>
-          )}
-        </FormControl>
+            <RadioGroup
+              row
+              name="gender"
+              value={form.watch("gender")}
+              onChange={(e) => form.setValue("gender", e.target.value)}
+            >
+              <FormControlLabel value="Nam" control={<Radio />} label="Nam" />
+              <FormControlLabel value="Nữ" control={<Radio />} label="Nữ" />
+              <FormControlLabel value="Khác" control={<Radio />} label="Khác" />
+            </RadioGroup>
+            {form.formState.errors.gender && (
+              <Typography variant="caption" color="error">
+                {form.formState.errors.gender.message}
+              </Typography>
+            )}
+          </FormControl>
 
-        <Button
-          disabled={isSubmitting}
-          type="submit"
-          className="submit"
-          variant="contained"
-          color="primary"
-          fullWidth
-          size="large"
-        >
-          Create an account
-        </Button>
-      </form>
-    </div>
+          <Button
+            disabled={isSubmitting}
+            type="submit"
+            className="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+            size="large"
+          >
+            Create an account
+          </Button>
+        </form>
+      </div>
+    </>
   );
 }
 

@@ -24,10 +24,10 @@ function MyOrder(props) {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow className="table-title">
-              <TableCell>ID</TableCell>
               <TableCell align="center">Mã đơn hàng</TableCell>
               <TableCell align="center">Giá</TableCell>
               <TableCell align="center">Status</TableCell>
+              <TableCell align="center">Payment Mode</TableCell>
               <TableCell align="center">Thời gian</TableCell>
             </TableRow>
           </TableHead>
@@ -43,14 +43,18 @@ function MyOrder(props) {
             <TableBody>
               {order.map((item, index) => (
                 <TableRow key={item.id}>
-                  <TableCell component="th" scope="row">
-                    {item.id}
-                  </TableCell>
                   <TableCell align="center">{item.idPayment}</TableCell>
-                  <TableCell align="center">{item.total_price} VND</TableCell>
                   <TableCell align="center">
-                    {item.status === 1 ? "COMPLETE" : "PENDING"}
+                    {item.paymentmode === "COD" ? (
+                      <span>{item.total_price} VNĐ</span>
+                    ) : item.paymentmode === "Paid by Paypal" ? (
+                      <span>{item.total_price} $</span>
+                    ) : (
+                      <span>{item.total_price}</span>
+                    )}
                   </TableCell>
+                  <TableCell align="center">{item.status}</TableCell>
+                  <TableCell align="center">{item.paymentmode}</TableCell>
                   <TableCell align="center">{item.paymentTime}</TableCell>
                 </TableRow>
               ))}
