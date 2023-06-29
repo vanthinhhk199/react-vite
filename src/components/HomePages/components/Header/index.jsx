@@ -25,6 +25,8 @@ import "./style.scss";
 import MiniCart from "./../Cart/miniCart";
 import SearchIcon from "@mui/icons-material/Search";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import userApi from "../../../../api/userApi";
+import { resetCart } from "../Cart/CartSlice";
 
 Header.propTypes = {};
 
@@ -34,6 +36,7 @@ const MODE = {
 };
 
 function Header({ onSearch, test }) {
+  const logoutCart = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState(MODE.LOGIN);
@@ -60,10 +63,21 @@ function Header({ onSearch, test }) {
     setAnchorEl(null);
   };
 
-  const handleLogoutClick = () => {
+  const handleLogoutClick = async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user.id;
+
+    const updatedLogoutCart = {
+      cart_items: logoutCart,
+      userId: userId,
+    };
+
+    const response = await userApi.logoutCart(updatedLogoutCart);
     const action = logout();
-    dispatch(action);
     setAnchorEl(null);
+    dispatch(action);
+    const resetCartAction = resetCart();
+    dispatch(resetCartAction);
   };
 
   const handleHomeClick = () => {

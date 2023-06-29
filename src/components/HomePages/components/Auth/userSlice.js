@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { resetCart } from '../Cart/CartSlice';
 import userApi from './../../../../api/userApi';
 import StorageKeys from './../../../../constants/storage-keys';
 
@@ -36,17 +35,11 @@ const userSlice = createSlice({
 
     logout(state) {
 
-      
-      // clear local storage
       localStorage.removeItem(StorageKeys.USER);
       localStorage.removeItem(StorageKeys.TOKEN);
-      
-      // Xóa giỏ hàng khỏi localStorage
-      // localStorage.removeItem(StorageKeys.CART);
-      
+
       state.current = {};
 
-      // dispatch(resetCart());
     },
   },
   extraReducers: {

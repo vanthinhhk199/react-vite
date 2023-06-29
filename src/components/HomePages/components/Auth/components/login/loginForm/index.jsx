@@ -47,7 +47,6 @@ function LoginForm(props) {
       {isSubmitting && (
         <LinearProgress
           className="progress"
-          fullWidth
           style={{ position: "absolute", top: "0", left: "0" }}
         />
       )}

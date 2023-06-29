@@ -43,6 +43,15 @@ const userApi = {
     const url = `/users/role/${id}`;
     return axiosClient.put(url, data);
   },
+  logoutCart(data){
+    const url = `/logout`;
+    return axiosClient.post(url, data);
+  },
+  loginCart(user_id){
+    const url = `/carts/products/${user_id}`;
+    return axiosClient.get(url);
+  },
+  
   
  
 };
