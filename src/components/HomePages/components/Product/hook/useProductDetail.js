@@ -10,7 +10,7 @@ export function useProductDetail(productId) {
       try {
         setLoading(true);
         const result = await productApi.getDetail(productId);
-        setProduct(result.product)
+        setProduct(result.data.product)
       } catch (error) {
         console.log(error);
       }

@@ -7,7 +7,8 @@ export function useUserAll() {
   const reloadUser = async () => {
     try {
         const response = await userApi.getUser();
-        setUser(response.data);
+        setUser(response.data.data);
+
     } catch (error) {
       console.error("Error fetching user data:", error);
     }

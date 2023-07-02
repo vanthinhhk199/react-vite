@@ -7,7 +7,7 @@ export function useOrderAll() {
   const reloadOrder = async () => {
     try {
         const response = await orderApi.getAllOrder();
-        setOrder(response.order);
+        setOrder(response.data.order);
     } catch (error) {
       console.error("Error fetching order data:", error);
     }

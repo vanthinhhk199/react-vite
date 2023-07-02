@@ -60,7 +60,7 @@ function CheckoutAddress(props) {
         const user = JSON.parse(localStorage.getItem("user"));
         const userId = user.id;
         const response = await checkoutApi.getAddress(userId);
-        setAddAddress(response);
+        setAddAddress(response.data);
       } catch (error) {
         enqueueSnackbar("Failed to fetch Address list", {
           variant: "error",

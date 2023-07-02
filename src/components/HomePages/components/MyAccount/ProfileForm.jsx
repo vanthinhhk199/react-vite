@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 import "./style.scss";
 import userApi from "../../../../api/userApi";
-import { format } from "date-fns";
 import { UserInfo } from "../Auth/userSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -36,8 +35,9 @@ function ProfileForm(props) {
       const user = JSON.parse(localStorage.getItem("user"));
       const user_id = user.id;
       const response = await userApi.userinfo(user_id);
-      setUserInfo(response.user);
-      dispatch(UserInfo(response.user));
+      const dataUser = response.data.user;
+      setUserInfo(dataUser);
+      dispatch(UserInfo(dataUser));
     })();
   }, []);
 
@@ -63,7 +63,8 @@ function ProfileForm(props) {
         const formData = new FormData();
         formData.append("avatar", selectedFile);
         const avt = await userApi.uploadAvatar(user_id, formData);
-        dispatch(UserInfo(avt.user));
+        const avatar = avt.data.user;
+        dispatch(UserInfo(avatar));
       }
 
       const data = await userApi.updateUserInfo(userInfo.id, editedUserInfo);
@@ -110,7 +111,7 @@ function ProfileForm(props) {
               {!editingField || editingField !== "name" ? (
                 <>
                   {userInfo.name} &nbsp;
-                  <a href="" onClick={() => handleEdit("name")}>
+                  <a href="#" onClick={() => handleEdit("name")}>
                     Thay đổi
                   </a>
                 </>
@@ -133,7 +134,7 @@ function ProfileForm(props) {
               {!editingField || editingField !== "phone" ? (
                 <>
                   {userInfo.phone} &nbsp;
-                  <a href="" onClick={() => handleEdit("phone")}>
+                  <a href="#" onClick={() => handleEdit("phone")}>
                     Thay đổi
                   </a>
                 </>
@@ -154,7 +155,7 @@ function ProfileForm(props) {
               {!editingField || editingField !== "gender" ? (
                 <>
                   {userInfo.gender} &nbsp;
-                  <a href="" onClick={() => handleEdit("gender")}>
+                  <a href="#" onClick={() => handleEdit("gender")}>
                     Thay đổi
                   </a>
                 </>
@@ -175,7 +176,7 @@ function ProfileForm(props) {
               {!editingField || editingField !== "birthday" ? (
                 <>
                   {userInfo.birthday} &nbsp;
-                  <a href="" onClick={() => handleEdit("birthday")}>
+                  <a href="#" onClick={() => handleEdit("birthday")}>
                     Thay đổi
                   </a>
                 </>

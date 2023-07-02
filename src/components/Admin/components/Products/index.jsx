@@ -11,7 +11,7 @@ function AddProduct(props) {
     (async () => {
       try {
         const response = await categoryApi.getAll();
-        setCategory(response.category);
+        setCategory(response.data.category);
       } catch (error) {
         console.error("Error fetching category data:", error);
       }

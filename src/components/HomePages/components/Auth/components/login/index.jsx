@@ -3,9 +3,10 @@ import { login } from "../../userSlice";
 import { useSnackbar } from "notistack";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoginForm from "./loginForm";
 import userApi from "../../../../../../api/userApi";
+import { addToCart, setQuantity } from "../../../Cart/CartSlice";
 
 Login.propTypes = {
   closeDialog: PropTypes.func,
@@ -14,31 +15,36 @@ Login.propTypes = {
 function Login(props) {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
-  const [userId, setUserId] = useState();
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   const handleCart = async () => {
     try {
-      console.log(userId);
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user.id;
       const dataCart = await userApi.loginCart(userId);
-      console.log(dataCart);
+      const allData = dataCart.data.cartItems;
+
+      for (const item of allData) {
+        const existingItem = cartItems.find(
+          (x) => parseInt(x.id) === parseInt(item.id)
+        );
+        if (existingItem) {
+          const quantity = item.quantity + existingItem.quantity;
+          dispatch(setQuantity({ id: item.id, quantity: quantity }));
+        } else {
+          dispatch(addToCart(item));
+        }
+      }
     } catch (error) {
       console.error("Error fetching cart:", error);
     }
   };
-
-  useEffect(() => {
-    if (userId) {
-      handleCart();
-    }
-  }, [userId]);
 
   const handleSubmit = async (values) => {
     try {
       const action = login(values);
       const resultAction = await dispatch(action);
       unwrapResult(resultAction);
-
-      setUserId(resultAction.payload.id);
 
       // close dialog
       const { closeDialog } = props;

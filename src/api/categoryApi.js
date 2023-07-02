@@ -1,13 +1,13 @@
-import axiosClient from "./axiosClient";
 
+import { axiosClient } from './axiosClient';
 const categoryApi = {
   getAll() {
     const url = `/categorys`;
-    return axiosClient.get(url);
+    return axiosClient().get(url);
   },
   addCate(formData){
     const url = `/category`;
-    return axiosClient.post(url, formData, {
+    return axiosClient().post(url, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -15,7 +15,7 @@ const categoryApi = {
   },
   updateCate(updatedCategory, id){
     const url = `/category/${id}`;
-    return axiosClient.post(url, updatedCategory, {
+    return axiosClient().post(url, updatedCategory, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -23,7 +23,7 @@ const categoryApi = {
   },
   deleteCate(id){
     const url = `/category/${id}`;
-    return axiosClient.delete(url);
+    return axiosClient().delete(url);
   },
 };
 export default categoryApi;

@@ -7,7 +7,7 @@ export function useProductAll() {
   const reloadProducts = async () => {
     try {
       const response = await productApi.getAllProd();
-      setProduct(response.product.data);
+      setProduct(response.data.product.data);
     } catch (error) {
       console.error("Error fetching category data:", error);
     }

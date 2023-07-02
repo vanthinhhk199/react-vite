@@ -35,7 +35,6 @@ function ListPage({ searchKeyword }) {
   const [priceMax, setPriceMax] = useState();
   const [cateId, setCateId] = useState("");
   const [search, setSearch] = useState("");
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -49,10 +48,10 @@ function ListPage({ searchKeyword }) {
           search
         );
         const newData = allData.data;
-        const last_page = allData.last_page;
+        const last_page = allData.data.last_page;
         const allCate = await categoryApi.getAll();
-        const categories = allCate.category;
-        setProductList(newData);
+        const categories = allCate.data.category;
+        setProductList(newData.data);
         setCate(categories);
         setTotalPage(last_page);
       } catch (error) {
@@ -122,7 +121,6 @@ function ListPage({ searchKeyword }) {
   const handlePageChange = (even, newPage) => {
     setPage(newPage);
 
-    // Update URL with page number
     const queryParams = new URLSearchParams({ page: newPage });
     navigate(`/?${queryParams.toString()}`);
   };
